@@ -1,15 +1,17 @@
-# Propagation_guidee
-Modélisation mathématique de la propagation acoustique dans les réseaux d’eaux usées
+# Propagation guidée
+Modélisation mathématique de la propagation acoustique dans les réseaux d’eaux usées, de pluies et de l'eau potable
 👉 Lien de l'application: https://propagationguidee-kmznyeuaiavwerqw2xdpqv.streamlit.app/
-# Simulateur acoustique dans les réseaux d’eaux usées
+# Simulateur acoustique dans les réseaux d’eaux usées, de pluies et de l'eau potable
 
-Ce projet permet de simuler la **propagation acoustique dans les conduites gravitaires ou enterrées**, typiques des réseaux d’eaux usées.  
+Ce projet permet de simuler la **propagation acoustique dans les conduites gravitaires ou enterrées**, typiques des réseaux d’eaux usées, de pluies et de l'eau potable.  
 L’application développée en **Streamlit** inclut :
 
 ✅ Simulation de la baisse du niveau sonore sur plusieurs kilomètres  
-✅ Choix du matériau et du milieu de propagation (air, liquide, paroi)  
+✅ Choix du matériau  
 ✅ Calibration automatique à partir de mesures terrain  
 ✅ Export PDF des résultats  
+
+💡💡 À noter : Le mouvement de l’eau ainsi que le sens du courant (dans notre cas, les eaux usées s'écoulent en sens inverse de la direction du son émis, allant de la station d'épuration vers le domicile, tandis que l'eau potable circule dans le même sens que le son émis, partant de l'usine de production d'eau potable jusqu'à chez nous) peuvent avoir un effet sur la propagation du son, mais l’effet reste négligeable dans un tuyau domestique, car la vitesse du son dans l'eau (1400m/s, contre 343 m/s le son dans l'air) est 700 fois supérieure à la vitesse du courant (typiquement 2 m/s). Sur 10 km, cela donne environ 20 dB de perte dans les deux cas, avec une différence de moins de 0.5 dB. 
 
 > 🎯 Objectif : comprendre comment le son se propage dans les réseaux souterrains et comment modéliser cela avec précision.
 
@@ -63,6 +65,8 @@ Le coefficient d’atténuation varie selon **le matériau de la conduite** et *
 | Paroi    | PVC      | 0.1 – 0.25                  |
 
 > Plus ce coefficient est élevé, plus le son s’affaiblit rapidement.
+
+
 
 ---
 
