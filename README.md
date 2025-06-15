@@ -11,7 +11,7 @@ L’application développée en **Streamlit** inclut :
 ✅ Calibration automatique à partir de mesures terrain  
 ✅ Export PDF des résultats  
 
-💡💡 À noter : Le mouvement de l’eau ainsi que le sens du courant (dans notre cas, les eaux usées s'écoulent en sens inverse de la direction du son émis, allant de la station d'épuration vers le domicile, tandis que l'eau potable circule dans le même sens que le son émis, partant de l'usine de production d'eau potable jusqu'à chez nous) peuvent avoir un effet sur la propagation du son, mais l’effet reste négligeable dans un tuyau domestique, car la vitesse du son dans l'eau (1400m/s, contre 343 m/s le son dans l'air) est 700 fois supérieure à la vitesse du courant (typiquement 2 m/s). Sur 10 km, cela donne environ 20 dB de perte dans les deux cas, avec une différence de moins de 0.5 dB. 
+💡💡 À noter : Le mouvement de l’eau ainsi que le sens du courant (dans notre cas, les eaux usées s'écoulent en sens inverse de la direction du son émis, allant de la station d'épuration vers le domicile, tandis que l'eau potable circule dans le même sens que le son émis, partant de l'usine de production d'eau potable jusqu'à chez nous) peuvent avoir un effet sur la propagation du son, mais l’effet reste négligeable dans un tuyau domestique, car la vitesse du son dans l'eau (1400m/s, contre 343 m/s dans l'air) est 700 fois supérieure à la vitesse du courant (typiquement 2 m/s). Sur 10 km, cela donne environ 20 dB de perte dans les deux cas, avec une différence de moins de 0.5 dB. 
 
 > 🎯 Objectif : comprendre comment le son se propage dans les réseaux souterrains et comment modéliser cela avec précision.
 
