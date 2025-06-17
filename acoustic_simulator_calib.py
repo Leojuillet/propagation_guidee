@@ -7,7 +7,7 @@ from scipy.optimize import curve_fit
 # Configuration page
 st.set_page_config(page_title="Simulateur acoustique", layout="centered")
 st.title("🔊 Simulateur de la propagation acoustique dans les conduites")
-st.markdown("Comparez la propagation du son selon les matériaux, testez alpha ou calibrez-le à partir de vos mesures terrain.")
+st.markdown("Comparez la propagation du son dans les conduites selon les matériaux, testez alpha ou calibrez-le à partir de vos mesures terrain.")
 
 # Paramètres utilisateur
 col1, col2 = st.columns(2)
