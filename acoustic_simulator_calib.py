@@ -63,17 +63,17 @@ ax.plot(distances / 1000, levels_open, label="Atténuation en champ libre", colo
 # Courbe pour l'atténuation en champ libre avec un mur -45dB
 levels_open_mur = levels_open.copy()
 levels_open_mur[distances >= 10] -= 45  # Appliquer l'atténuation à partir de 10m
-ax.plot(distances / 1000, levels_open_mur, label="Atténuation en champ libre avec un mur à 10m", color='gray', linewidth=1, linestyle="--")
+ax.plot(distances / 1000, levels_open_mur, label="Atténuation en champ libre avec un mur à 10m (-45dB)", color='gray', linewidth=1, linestyle="--")
 
 # Courbe pour le coefficient alpha personnalisé
 levels_custom = compute_levels(alpha)
-ax.plot(distances / 1000, levels_custom, label=f"Alpha personnalisé (α={alpha:.3f} dB/m)", color='black', linewidth=2)
+ax.plot(distances / 1000, levels_custom, label=f"Alpha personnalisé (α={alpha:.3f} dB/m) pour la propagation dans les conduites", color='black', linewidth=2)
 
 # Courbes pour les matériaux sélectionnés
 for material in selected_materials:
     alpha_mat = materials[material]
     levels = compute_levels(alpha_mat)
-    ax.plot(distances / 1000, levels, label=f"{material} (α={alpha_mat:.3f} dB/m)", linestyle="--")
+    ax.plot(distances / 1000, levels, label=f"{material} (α={alpha_mat:.3f} dB/m pour la propagation dans les conduites)", linestyle="--")
 
 ax.set_title(f"Atténuation acoustique – {f0} Hz, {L0} dB à l'origine", fontsize=14)
 ax.set_xlabel("Distance (km)", fontsize=12)
