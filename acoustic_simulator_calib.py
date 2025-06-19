@@ -62,8 +62,8 @@ ax.plot(distances / 1000, levels_open, label="Atténuation en champ libre", colo
 
 # Courbe pour l'atténuation en champ libre avec un mur -45dB
 levels_open_mur = levels_open.copy()
-levels_open_mur[distances >= 20] -= 45  # Appliquer l'atténuation à partir de 20m
-ax.plot(distances / 1000, levels_open_mur, label="Atténuation en champ libre avec un mur à 20m", color='gray', linewidth=1, linestyle="--")
+levels_open_mur[distances >= 10] -= 45  # Appliquer l'atténuation à partir de 10m
+ax.plot(distances / 1000, levels_open_mur, label="Atténuation en champ libre avec un mur à 10m", color='gray', linewidth=1, linestyle="--")
 
 # Courbe pour le coefficient alpha personnalisé
 levels_custom = compute_levels(alpha)
