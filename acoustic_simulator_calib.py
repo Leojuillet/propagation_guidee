@@ -68,9 +68,6 @@ def modele_attenuation(d, alpha_total):
 levels_custom = [compute_levels(alpha_total, d, pertes_base, pertes_par_branche, intervalle_branches) for d in distances]
 
 # Ajout champ libre
-#levels_open = [max(L0 - 20 * np.log10(d), 0) if d > 0 else L0 for d in distances]
-#levels_open_mur = np.array(L0 - 20 * np.log10(d) if d > 0 else L0 for d in distances)#[L0 - 20 * np.log10(d) if d > 0 else L0 for d in distances])
-#levels_open_mur[distances >= 10] -= 45  # Appliquer l'atténuation à partir de 10m
 # Calcul avec seuil minimal à 0 dB SPL (évite les valeurs non physiques)
 levels_open = np.array([
     max(L0 - 20 * np.log10(d), 0) if d > 0 
@@ -81,9 +78,6 @@ levels_open = np.array([
 # Application de l'atténuation supplémentaire à partir de 10m (tout en gardant >= 0)
 levels_open_mur = levels_open.copy()
 levels_open_mur[distances >= 10] = np.maximum(levels_open_mur[distances >= 10] - 45, 0)  # Évite < 0 après atténuation
-
-levels_open_mur = levels_open.copy()
-levels_open_mur[distances >= 10] = np.maximum(levels_open_mur[distances >= 10] - 45, 0)
 
 # Graphique
 fig, ax = plt.subplots(figsize=(10, 6))
