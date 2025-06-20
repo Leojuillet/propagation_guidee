@@ -92,7 +92,7 @@ for material in selected_materials:
     alpha_mat = materials[material]
     alpha_total_mat = alpha_mat + alpha_ecoulement + alpha_reflexions
     levels = [compute_levels(alpha_total_mat, d, pertes_base, pertes_par_branche, intervalle_branches) for d in distances]
-    ax.plot(distances / 1000, levels, label=f"{material} (α={alpha_total_mat:.4f} dB/m)", linestyle="--")
+    ax.plot(distances / 1000, levels, label=f"{material} (α={alpha_mat:.4f} dB/m)", linestyle="--")
 
 # Mise en forme graphique
 ax.set_title(f"Atténuation acoustique – {f0} Hz, {L0} dB à l'origine\n"
