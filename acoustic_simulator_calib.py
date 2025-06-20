@@ -78,7 +78,7 @@ fig, ax = plt.subplots(figsize=(10, 6))
 # Courbes principales
 ax.plot(distances / 1000, levels_open, label="Champ libre", color='green', linewidth=1, linestyle="--")
 ax.plot(distances / 1000, levels_open_mur, label="Champ libre + mur à 10m (-45dB)", color='gray', linewidth=1, linestyle="--")
-ax.plot(distances / 1000, levels_custom, label=f"Alpha personnalisé (α={alpha_total:.4f} dB/m)", color='black', linewidth=2)
+ax.plot(distances / 1000, levels_custom, label=f"Alpha personnalisé (α={alpha:.4f} dB/m)", color='black', linewidth=2)
 
 # Courbes pour les matériaux sélectionnés
 for material in selected_materials:
