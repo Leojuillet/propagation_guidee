@@ -56,7 +56,7 @@ def compute_pertes_jonctions(distance, pertes_par_branche, intervalle_branches):
 def compute_levels(alpha_total, d, pertes_base, pertes_par_branche, intervalle_branches):
     pertes_jonctions = compute_pertes_jonctions(d, pertes_par_branche, intervalle_branches)
     total_pertes = pertes_base + pertes_jonctions
-    return max(L0 - (alpha_total * d + total_pertes), 0)
+    return L0 - (alpha_total * d + total_pertes)
 
 # Modèle théorique pour la calibration
 def modele_attenuation(d, alpha_total):
