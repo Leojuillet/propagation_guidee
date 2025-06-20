@@ -96,6 +96,7 @@ for material in selected_materials:
 
 # Mise en forme graphique
 ax.set_title(f"Atténuation acoustique – {f0} Hz, {L0} dB à l'origine\n"
+             f"Atténuation piège à son {attenuation_silencieux} dB \n"
              f"{intervalle_branches} m entre jonctions, {pertes_par_branche} dB par branche", fontsize=12)
 ax.set_xlabel("Distance (km)", fontsize=12)
 ax.set_ylabel("Niveau sonore (dB SPL)", fontsize=12)
