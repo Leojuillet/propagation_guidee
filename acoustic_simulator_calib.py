@@ -76,7 +76,7 @@ for material in selected_materials:
     levels = compute_levels(alpha_mat)
     ax.plot(distances / 1000, levels, label=f"{material} (α={alpha_mat:.3f} dB/m pour la propagation dans les conduites)", linestyle="--")
 
-ax.set_title(f"Atténuation acoustique – {f0} Hz, {L0} dB à l'origine, avec l'atténuation d'un piège à son de {attenuation_silencieux} dB à 10m", fontsize=14)
+ax.set_title(f"Atténuation acoustique – {f0} Hz, {L0} dB à l'origine, avec l'atténuation d'un piège à son de {attenuation_silencieux} dB", fontsize=14)
 ax.set_xlabel("Distance (km)", fontsize=12)
 ax.set_ylabel("Niveau sonore (dB SPL)", fontsize=12)
 ax.grid(True, linestyle='--', alpha=0.7)
