@@ -1,15 +1,19 @@
 # Propagation guidée
 Modélisation mathématique de la propagation acoustique dans les réseaux d’eaux usées, de pluies et de l'eau potable
 👉 Lien de l'application: https://propagationguidee-kmznyeuaiavwerqw2xdpqv.streamlit.app/
+
 # Simulateur acoustique dans les réseaux d’eaux usées, de pluies et de l'eau potable
 
 Ce projet permet de simuler la **propagation acoustique dans les conduites gravitaires ou enterrées**, typiques des réseaux d’eaux usées, de pluies et de l'eau potable.  
 L’application développée en **Streamlit** inclut :
 
 ✅ Simulation de la baisse du niveau sonore sur plusieurs kilomètres  
-✅ Choix du matériau  
+✅ Choix du matériau et du milieu de propagation (fonte, PVC, béton...)  
+✅ Jonctions réparties avec perte progressive (ajustables)  
+✅ Atténuation liée à l'écoulement et aux réflexions (en dB/m)  
 ✅ Calibration automatique à partir de mesures terrain  
-✅ Export PDF des résultats  
+✅ Export PDF des résultats (à ajouter si nécessaire)  
+✅ Courbes de référence : champ libre et champ libre + mur à 10m (-45 dB)  
 
 💡💡 À noter : Le mouvement de l’eau ainsi que le sens du courant (dans notre cas, les eaux usées s'écoulent en sens inverse de la direction du son émis, allant de la station d'épuration vers le domicile, tandis que l'eau potable circule dans le même sens que le son émis, partant de l'usine de production d'eau potable jusqu'à chez nous) peuvent avoir un effet sur la propagation du son, mais l’effet reste négligeable dans un tuyau domestique, car la vitesse du son dans l'eau (1400m/s, contre 343 m/s dans l'air) est 700 fois supérieure à la vitesse du courant (typiquement 2 m/s). Sur 10 km, cela donne environ 20 dB de perte dans les deux cas, avec une différence de moins de 0.5 dB. 
 
@@ -29,24 +33,49 @@ Le niveau sonore diminue progressivement à mesure que le son parcourt la condui
 où :
 - **L(d)--Niveau sonore à la distance d** : niveau en dB SPL à un point donné,
 - **L0--Niveau initial** : niveau sonore au départ (par exemple 100 dB SPL),
-- **α--Atténuation** : coefficient d'atténuation linéique (en dB/m), dépendant du matériau et du milieu de propagation,
+- **α--Atténuation** : coefficient d’atténuation global (en dB/m), combinant :
+    - Matériau de la conduite,
+    - Effets de l’écoulement,
+    - Réflexions multiples
 - **d--Distance** : longueur parcourue par le son (en mètres),
-- **P--Pertes supplémentaires** : perte d'énergie liée aux jonctions, courbures, écoulement (en dB).
-
-> ⚠️ Le niveau sonore ne peut pas descendre en dessous de 0 dB SPL.
+- **Pertes fixes** : effets localisés comme l'ajout d'un silencieux ou d'un piège à son.
 
 ---
 
-## 🔤 Exemple concret
+### 🔁 Jonctions réparties
 
-Si :
-- Niveau initial L0 = 100 dB SPL
-- Coefficient d’atténuation α = 0.01 dB/m
-- Pertes supplémentaires P = 10 dB
-- Distance d = 5000 mètres
+Les bifurcations (jonctions) sont modélisées comme des **pertes progressives** plutôt que fixes :
 
-Alors :
-Niveau après 5 km = 100 - (0.01 * 5000 + 10) = 40 dB SPL
+- Vous pouvez régler :
+  - La distance entre chaque jonction (en mètres),
+  - La perte sonore par jonction (en dB).
+
+Exemple :
+- Si une bifurcation tous les 400 mètres → 12 bifurcations sur 5 km,
+- Avec 2.5 dB de perte par jonction → total de **30 dB** après 5 km.
+---
+
+### 💥 Pertes supplémentaires distribuées
+
+Les pertes dues à :
+- L’écoulement turbulent,
+- Les réflexions multiples,
+
+sont intégrées sous forme de **taux linéiques** (en dB/m), et non plus comme des valeurs fixes.
+
+Cela rend le modèle :
+- Plus réaliste physiquement,
+- Plus adapté à la calibration à partir de mesures terrain.
+
+---
+
+### 🌐 Champ libre et champ libre + mur
+
+Deux courbes de référence sont affichées :
+- **Champ libre** : simulation du son dans l’air sans obstacle.
+- **Champ libre avec mur à 10m** : atténuation brutale de **45 dB** à partir de 10 mètres.
+
+Cela permet de comparer le comportement du son dans l’air libre et dans un réseau guidé (conduite).
 
 
 ---
@@ -70,16 +99,19 @@ Le coefficient d’atténuation varie selon **le matériau de la conduite** et *
 
 ---
 
-## 💥 Pertes supplémentaires
+## 📌 Résumé des paramètres utilisés
 
-En plus de l’atténuation naturelle, certaines structures du réseau causent des pertes additionnelles :
-
-- Jonctions / bifurcations : environ 2.5 dB par branche
-- Réflexions (coudes, changements de diamètre) : ~5 dB
-- Interactions avec l’écoulement turbulent : ~3 dB
-
-Exemple :  
-Pour 8 branches + réflexions + écoulement → perte totale ≈ **28 dB**
+| Paramètre                   | Description                                              | Unité     |
+|----------------------------|----------------------------------------------------------|-----------|
+| Niveau initial              | Niveau sonore au départ                                  | dB SPL    |
+| Atténuation matériau        | Perte par mètre due au matériau de la conduite           | dB/m      |
+| Atténuation écoulement      | Perte par mètre due à la turbulence ou flux d’eau usée   | dB/m      |
+| Atténuation réflexions      | Perte par mètre due aux coudes, raccords, etc.           | dB/m      |
+| Distance entre jonctions    | Espacement moyen entre deux bifurcations                  | m         |
+| Perte par jonction          | Affaiblissement sonore à chaque bifurcation             | dB        |
+| Distance totale            | Longueur sur laquelle le son se propage                 | m         |
+| Niveau final                | Niveau sonore après la distance totale                 | dB SPL    |
+| Erreur résiduelle (calibration) | Différence moyenne entre modèle et mesures terrain | dB        |
 
 ---
 
@@ -91,16 +123,7 @@ Elle cherche la valeur du coefficient qui donne la meilleure prédiction possibl
 
 ---
 
-## 📌 Résumé des paramètres utilisés
 
-| Paramètre           | Description                      | Unité     |
-|---------------------|----------------------------------|-----------|
-| Niveau initial      | Niveau sonore au départ          | dB SPL    |
-| Atténuation         | Perte par mètre due au matériau   | dB/m      |
-| Distance            | Longueur de propagation          | m         |
-| Pertes supplémentaires | Dues aux raccords, écoulement  | dB        |
-| Niveau final        | Niveau sonore après la distance  | dB SPL    |
-| Erreur résiduelle   | Différence entre modèle et mesure| dB        |
 
 ---
 
